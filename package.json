@@ -11,9 +11,11 @@
     "import-data": "node src/scripts/import-data.mjs"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.22.3",
     "@clerk/nextjs": "^6.9.15",
     "@portabletext/editor": "^1.23.0",
     "@radix-ui/react-dialog": "^1.1.4",
+    "@sanity/base": "^2.36.2",
     "@sanity/client": "^6.25.0",
     "@sanity/desk-tool": "^2.36.2",
     "@sanity/icons": "^3.5.6",

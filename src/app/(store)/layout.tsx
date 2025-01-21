@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../globals.css";
 import Navbar from "@/components/Navbar";
-import Navbar2 from "@/components/Navbar2";
+
 import Footer from "@/components/Footer";
 import FooterBottom from "@/components/FooterBottom";
 import { Toaster } from "react-hot-toast";
@@ -38,7 +38,7 @@ export default function RootLayout({
     >
       <main>
       <Navbar />
-      <Navbar2 />
+      <Navbar3 />
       
       {children}
       <Footer />

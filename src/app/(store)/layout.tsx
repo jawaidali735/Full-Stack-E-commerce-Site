@@ -32,30 +32,29 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-  <html lang="en">
-    <body
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
-      <main>
-      <Navbar />
-      <Navbar3 />
-      
-      {children}
-      <Footer />
-      <FooterBottom />
-      </main>
-      <Toaster
-        position="bottom-right"
-        toastOptions={{
-          style: {
-            background: "#000000",
-            color: "#FFFFFF",
-          },
-        }}
-      />
-    </body>
-  </html>
-</ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <main>
+            <Navbar />
+            <Navbar3 />
 
+            {children}
+            <Footer />
+            <FooterBottom />
+          </main>
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: "#000000",
+                color: "#FFFFFF",
+              },
+            }}
+          />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

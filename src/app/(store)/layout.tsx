@@ -7,7 +7,8 @@ import Footer from "@/components/Footer";
 import FooterBottom from "@/components/FooterBottom";
 import { Toaster } from "react-hot-toast";
 import { ClerkProvider } from "@clerk/nextjs";
-import Navbar3 from "@/components/Navbar3";
+
+import Navbar2 from "@/components/Navbar2";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -38,7 +39,7 @@ export default function RootLayout({
         >
           <main>
             <Navbar />
-            <Navbar3 />
+            <Navbar2 />
 
             {children}
             <Footer />

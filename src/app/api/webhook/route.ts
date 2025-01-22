@@ -16,8 +16,8 @@ export async function POST(req: NextRequest) {
     if (!sig) {
         return NextResponse.json({ error: 'No Stripe signature' }, { status: 400 });
     }
-
-    const weebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    // process.env.STRIPE_WEBHOOK_SECRET use this for localhost
+    const weebhookSecret = "whsec_mjPPpe9974euGybR5QbsbHkAANuMSNkB";
     // Check if the Stripe webhook secret is available
     if (!weebhookSecret) {
         console.error('Stripe webhook secret is not set');

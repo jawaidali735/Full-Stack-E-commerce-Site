@@ -212,7 +212,7 @@ const SingleBlogPost = () => {
   
   return (
         <section>
-                <PageHeader heading="Single Blog"/>
+                <PageHeader heading="Single Blog" />
     <div className="container mx-auto px-4">
 
       <div className="max-w-[1170px] mx-auto px-4 lg:px-0">

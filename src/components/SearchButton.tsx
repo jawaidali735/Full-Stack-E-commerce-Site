@@ -1,13 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { CiSearch } from "react-icons/ci";
+import { RiCloseFill } from "react-icons/ri"; // Optional: Close button for mobile
+
 const SearchButton = () => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
+
   return (
-    <div>
-      <form action="/search" >
-  <div className="relative hidden sm:block sm:ml-4 max-w-[500px] sm:max-w-[400px] lg:max-w-[500px]">
+    <div className="relative">
+      <form action="/search" method="GET">
+        {/* Mobile View */}
+        <div className="sm:hidden">
+          {/* Search Icon when Search Box is Hidden */}
+          {!isSearchOpen && (
+            <button
+              type="button"
+              onClick={toggleSearch}
+              className="text-[#FB2E86] p-2"
+            >
+              <CiSearch size={24} />
+            </button>
+          )}
+
+          {/* Search Box that Appears when Search is Open */}
+          {isSearchOpen && (
+            <div className="relative flex items-center">
+              <input
+                type="text"
+                name="query"
+                placeholder="Search products..."
+                className="border-2 focus:ring-1 focus:ring-[#E7E6EF] focus:outline-none border-[#E7E6EF] p-2 w-[250px] sm:w-[400px] rounded-md"
+              />
+              <button
+                type="submit"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white bg-[#FB2E86] p-2 rounded-md"
+              >
+                <CiSearch size={20} />
+              </button>
+              {/* Close Button to Hide Search Box */}
+              <button
+                type="button"
+                onClick={toggleSearch}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 text-[#FB2E86] p-2 rounded-md"
+              >
+                <RiCloseFill size={20} />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Desktop View */}
+        <div className="relative hidden sm:block sm:ml-4 max-w-[500px] sm:max-w-[400px] lg:max-w-[500px]">
     <input
       type="text"
-      name="query" // This will be the query parameter sent in the URL
+      name="query" 
       placeholder="Search products..."
      
       
@@ -20,113 +69,11 @@ const SearchButton = () => {
       <CiSearch />
     </button>
   </div>
-</form>
+
+        
+      </form>
     </div>
-  )
+  );
 }
 
-export default SearchButton
-
-
-
-// // components/SearchResults.tsx
-// "use client"
-// import React, { useState, useEffect } from "react";
-// import { client } from "@/sanity/lib/client"; // Import your Sanity client
-// import Link from "next/link";
-// import Image from "next/image";
-// // TypeScript interface for product structure
-// interface Product {
-//   name: string;
-//   slug: {
-//     current: string;
-//   };
-//   image?: string;
-// }
-
-// // Fetch products from Sanity based on the search query
-// const fetchProducts = async (query: string): Promise<Product[]> => {
-//   const queryString = `*[_type == "product" && name match "${query}*"]{
-//     name,
-//     slug,
-//     image
-//   }`;
-//   const products = await client.fetch(queryString);
-//   return products;
-// };
-
-// const SearchResults = () => {
-//   const [searchQuery, setSearchQuery] = useState<string>("");  // Store the search query
-//   const [searchResults, setSearchResults] = useState<Product[]>([]);  // Store search results
-//   const [loading, setLoading] = useState<boolean>(false);  // Loading state
-
-//   useEffect(() => {
-//     const getSearchResults = async () => {
-//       if (searchQuery.trim()) {
-//         setLoading(true);  // Set loading to true
-//         const results = await fetchProducts(searchQuery);  // Fetch products based on query
-//         setSearchResults(results);  // Update the search results
-//         setLoading(false);  // Set loading to false once results are fetched
-//       } else {
-//         setSearchResults([]);
-//       }
-//     };
-
-//     getSearchResults();  // Fetch results on query change
-//   }, [searchQuery]);
-
-//   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setSearchQuery(e.target.value);  // Update query as the user types
-//   };
-
-//   return (
-//     <div className="max-w-screen-xl mx-auto p-4">
-//       {/* Input field for the search query */}
-//       <div className="mb-8">
-//         <input
-//           type="text"
-//           placeholder="Search products..."
-//           value={searchQuery}
-//           onChange={handleSearchChange}
-//           className="border-2 focus:ring-1 focus:ring-[#E7E6EF] focus:outline-none border-#E7E6EF p-[10px] text-lg w-full max-w-[400px] mx-auto"
-//         />
-//       </div>
-
-//       {/* Loading indicator */}
-//       {loading && <div className="text-center text-xl">Loading...</div>}
-
-//       {/* Message if no results found */}
-//       {!loading && searchResults.length === 0 && searchQuery.trim() && (
-//         <div className="text-center text-xl text-red-500">Products not found</div>
-//       )}
-
-//       {/* Display search results */}
-//       {!loading && searchResults.length > 0 && (
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-//           {searchResults.map((product) => (
-//             <div
-//               key={product.slug.current}
-//               className="bg-white rounded-md shadow-md hover:shadow-xl transition-all duration-300"
-//             >
-//               <Link href={`/product/${product.slug.current}`}>
-                
-//                   {/* Product image and name */}
-//                   <Image
-//                     src={product.image || "/placeholder.jpg"}
-//                     alt={product.name}
-//                     className="w-full h-64 object-cover rounded-t-md"
-//                   />
-//                   <div className="p-4">
-//                     <h3 className="text-lg font-semibold text-center">{product.name}</h3>
-//                   </div>
-              
-//               </Link>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default SearchResults;
+export default SearchButton;

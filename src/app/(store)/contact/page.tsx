@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function Contact() {
   return (
     <section >
-            <PageHeader heading="Contact Us"/>
+            <PageHeader heading="Contact Us" />
 
         <div className="bg-white max-w-[1177px] mx-auto py-16 px-4 sm:px-8">
 

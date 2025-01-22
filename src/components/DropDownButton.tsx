@@ -31,21 +31,7 @@ const DropDownButton = () => {
                         About
                       </Link>
                     </li>
-                    <li className="px-4 py-2 hover:bg-gray-100">
-                      <Link href="/contact" onClick={closeDropdown}>
-                        Contact
-                      </Link>
-                    </li>
-                    <li className="px-4 py-2 hover:bg-gray-100">
-                      <Link href="/shop" onClick={closeDropdown}>
-                        Shop
-                      </Link>
-                    </li>
-                    <li className="px-4 py-2 hover:bg-gray-100">
-                      <Link href="/shop" onClick={closeDropdown}>
-                        Product
-                      </Link>
-                    </li>
+                   
                     <li className="px-4 py-2 hover:bg-gray-100">
                       <Link href="/faq" onClick={closeDropdown}>
                         FAQ&apos;s

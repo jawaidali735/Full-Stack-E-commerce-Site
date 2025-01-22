@@ -62,10 +62,10 @@ const Wishlist = () => {
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
-                  <tr className="text-[#1D3178] text-xl text-left">
+                  <tr className="text-[#1D3178] text-base sm:text-xl text-left">
                     <th className="px-2 sm:px-4 py-2">Product</th>
                     <th className="px-2 sm:px-4 py-2 text-center">Price</th>
-                    <th className="px-2 sm:px-4 py-2 text-center">Old Price</th>
+                    <th className="px-2 sm:px-4 py-2 text-center whitespace-nowrap ">Old Price</th>
                     <th className="px-2 sm:px-4 py-2 text-center">Actions</th>
                   </tr>
                 </thead>

@@ -12,12 +12,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import React from "react";
+import React, { useState } from "react";
 import SearchButton from "./SearchButton";
 import DropDownButton from "./DropDownButton";
 
 const Navbar2 = () => {
-  
+  const [open, setOpen] = useState(false);
+
+  const closeMenu = () => {
+    setOpen(false);
+  };
 
   return (
     <div className="max-w-[1177px] sticky top-14 bg-white z-50 px-4 sm:px-4 mx-auto mt-none   mt-4 mb-4 ">
@@ -43,6 +47,7 @@ const Navbar2 = () => {
             >
               Products
             </Link>
+          
             <Link
               href="/blogs"
               className="text-[14px] sm:text-[16px] hidden sm:inline-block hover:text-[#FB2E86] hover:underline underline-offset-4 text-[#0D0E43]"
@@ -62,6 +67,7 @@ const Navbar2 = () => {
             >
               Contact
             </Link>
+          
           </div>
         </div>
 
@@ -70,16 +76,17 @@ const Navbar2 = () => {
 
       <div className="relative hidden sm:block sm:ml-4 max-w-[500px] sm:max-w-[400px] lg:max-w-[500px]">
     
+      <SearchButton/>
 
-<SearchButton/>
 
       </div>
 
       {/* Other Navbar Content */}
     </div>
 
-        <div className="sm:hidden">
-          <Sheet>
+        <div className="sm:hidden flex items-center">
+        <SearchButton/>
+          <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger>
               <IoMenu className="text-[#FB2E86] text-3xl sm:hidden" />
             </SheetTrigger>
@@ -93,74 +100,48 @@ const Navbar2 = () => {
               <div className="flex flex-col gap-4 p-4">
                 <Link
                   href="/#"
-                  className="text-[#0D0E43] font-lato text-[16px]"
+                  onClick={closeMenu} 
+                  className="text-[#0D0E43] font-lato text-[16px] "
                 >
                   Home
                 </Link>
 
-                {/* <button
-                  onClick={toggleDropdown}
-                  className="text-[14px] sm:text-[16px] flex col text-[#0D0E43] hover:text-[#FB2E86] hover:underline underline-offset-4"
-                >
-                  Pages
-                </button>
-
-                {showDropdown && (
-                  <div className="absolute left-0 mt-2 bg-white shadow-lg rounded-md py-2 z-50 w-[150px] border border-gray-200">
-                    <ul>
-                      <li className="px-4 py-2 hover:bg-gray-100">
-                        <Link href="/about" onClick={closeDropdown}>
-                          About
-                        </Link>
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100">
-                        <Link href="/contact" onClick={closeDropdown}>
-                          Contact
-                        </Link>
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100">
-                        <Link href="/shop" onClick={closeDropdown}>
-                          Shop
-                        </Link>
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100">
-                        <Link href="/product" onClick={closeDropdown}>
-                          Product
-                        </Link>
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100">
-                        <Link href="/faq" onClick={closeDropdown}>
-                          FAQ&apos;s
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                )} */}
+                
 
                 <Link
                   href="/shop"
+                  onClick={closeMenu} 
                   className="text-[#0D0E43] font-lato text-[16px]"
                 >
                   Products
                 </Link>
+                <Link onClick={closeMenu}  href="/about"className="text-[#0D0E43] font-lato text-[16px]">
+                        About
+                      </Link>
                 <Link
                   href="/blogs"
+                  onClick={closeMenu} 
                   className="text-[#0D0E43] font-lato text-[16px]"
                 >
                   Blog
                 </Link>
                 <Link
                   href="/shop"
+                  onClick={closeMenu} 
                   className="text-[#0D0E43] font-lato text-[16px]"
                 >
                   Shop
                 </Link>
                 <Link
                   href="/contact"
+                  onClick={closeMenu} 
                   className="text-[#0D0E43] font-lato text-[16px]"
                 >
                   Contact
                 </Link>
+                <Link  href="/faq" onClick={closeMenu}  className="text-[#0D0E43] font-lato text-[16px]">
+                        FAQ&apos;s
+                      </Link>
               </div>
             </SheetContent>
           </Sheet>

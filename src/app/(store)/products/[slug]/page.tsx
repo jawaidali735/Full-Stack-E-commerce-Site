@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import {
   FaFacebookF,
   FaTwitter,
-  FaStar,
+ 
  
   FaArrowRight,
 } from "react-icons/fa";
@@ -19,6 +19,7 @@ import { urlFor } from "@/sanity/lib/image";
 import CartButton from "@/components/CartButton";
 import WishlistButton from "@/components/WishlistButton";
 import Review from "@/components/Review";
+import StarReview from "@/components/StarReview";
 interface ProductPageProps {
   params: { slug: string };
 }
@@ -58,8 +59,8 @@ const ProductDetail = async ({ params }: ProductPageProps) => {
   });
 
 
-  const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
-  const averageRating = reviews.length ? totalRatings / reviews.length : 0;
+  
+ 
   
 
 
@@ -87,22 +88,7 @@ const ProductDetail = async ({ params }: ProductPageProps) => {
               {product?.name}
             </h1>
 
-            <div className="flex items-center space-x-2 text-[#FFC416]">
-              {[...Array(5)].map((_, i) => (
-                <FaStar
-                  key={i}
-                  className={
-                    i < Math.round(averageRating)
-                      ? "text-yellow-500"
-                      : "text-gray-300"
-                  }
-                />
-              ))}
-              <p className="text-[#151875] font-josefin">
-                ({reviews.length}) {/* Number of reviews */}
-              </p>
-            </div>
-
+           <StarReview product={product}/>
             <p className="text-md lg:text-lg text-[#151875] font-josefin">
               ${product?.price}{" "}
               <span className="line-through text-[#FB2E86] ml-4">

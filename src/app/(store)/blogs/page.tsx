@@ -126,7 +126,7 @@ const Blogs = () => {
   return (
     <section>
 
-      <PageHeader heading="Blog Page"/>
+      <PageHeader heading="Blog Page" />
     <div className="w-full overflow-hidden">
       <div className="max-w-[1170px] mx-auto px-4 lg:px-0">
         <div className="flex flex-wrap">

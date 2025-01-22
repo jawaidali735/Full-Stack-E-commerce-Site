@@ -30,7 +30,7 @@ const StarReview = ({ product }: ReviewProps) => {
       createdAt
     }`;
 
-    // Fetch initial reviews
+    // Fetch the reviews for the product
     const fetchReviews = async () => {
       const fetchedReviews = await client.fetch(reviewsQuery, {
         productId: product._id,
@@ -40,13 +40,39 @@ const StarReview = ({ product }: ReviewProps) => {
 
     fetchReviews();
 
-    // Real-time updates for reviews
+    // Subscribe to real-time updates
     const subscription = client.listen(
-      '*[_type == "review" && productId._ref == $productId]',
+      `*[_type == "review" && productId._ref == $productId]`,
       { productId: product._id }
-    ).subscribe((update: any) => { // Using `any` for now to allow mutationType
-      if (update.mutationType === "create") {
-        setReviews((prevReviews) => [update.document, ...prevReviews]);
+    ).subscribe(async (update) => {
+      // Access the documentId from the update and fetch the review
+      const documentId = update.documentId;
+
+      if (documentId) {
+        // Fetch the full document by documentId
+        const fetchedReview = await client.fetch(
+          `*[_id == $documentId]`,
+          { documentId }
+        );
+
+        // Update the reviews state with the new review or modify an existing review
+        if (fetchedReview.length > 0) {
+          const newReview = fetchedReview[0];
+          setReviews((prevReviews) => {
+            // Check if the review already exists, and if it does, update it
+            const reviewExists = prevReviews.some(
+              (review) => review._id === newReview._id
+            );
+
+            if (reviewExists) {
+              return prevReviews.map((review) =>
+                review._id === newReview._id ? newReview : review
+              );
+            } else {
+              return [newReview, ...prevReviews]; // Add the new review
+            }
+          });
+        }
       }
     });
 
@@ -65,11 +91,7 @@ const StarReview = ({ product }: ReviewProps) => {
         {[...Array(5)].map((_, i) => (
           <FaStar
             key={i}
-            className={
-              i < Math.round(averageRating)
-                ? "text-yellow-500"
-                : "text-gray-300"
-            }
+            className={i < Math.round(averageRating) ? "text-yellow-500" : "text-gray-300"}
           />
         ))}
         <p className="text-[#151875] font-josefin">
